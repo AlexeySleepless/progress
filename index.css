@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+:root{
+    --bg-color: rgba(0, 48, 120, .09);
+    --bg-color-primary: #005bff;
+    --input-width: 70px;
+    --input-height: 40px;
+    --input-radius: var(--input-height);
+    --anim-time: 0.3s;
+}
+
+label{
+    -webkit-tap-highlight-color: transparent;
+}
+
+#app{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 5px;
+}
+
+
+.title{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.valueInput, .slider{
+    border-radius: var(--input-radius);
+    height: var(--input-height);
+    width: var(--input-width);
+}
+
+.valueInput{
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.valueInput:focus{
+    outline: none;
+}
+
+.labelInput{
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    gap: 10px;
+}
+
+.switchInput{
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider{
+    position: relative;
+    cursor: pointer;
+    background-color: var(--bg-color);
+    transition: background-color var(--anim-time);
+    --indent: 3px;
+    --size: calc(var(--input-height) - 2 * var(--indent));
+}
+
+.slider::before{
+    position: absolute;
+    content: "";
+    height: var(--size);
+    width: var(--size);
+    left: var(--indent);
+    top: var(--indent);
+    border-radius: 100%;
+    background-color: white;
+    transition: transform var(--anim-time);
+}
+
+.switchInput:checked+.slider{
+    background-color: var(--bg-color-primary);
+}
+
+.switchInput:checked+.slider::before{
+    --endpoint: calc(var(--input-width) - 2 * var(--indent) - var(--size));
+    transform: translateX(var(--endpoint));
+}
+
+
+.content, .controls{
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+}
+.content{
+    position: relative;
+    justify-content: end;
+}
+.controls{
+    justify-content: start;
+}
+
+@media (min-width: 530px) {
+    #app, .content, .controls{
+        flex-direction: row;
+    }
+}
+
+.progressBar{
+    width: 150px;
+    height: 150px;
+    --progressLine-color: var(--bg-color-primary);
+    --fullLine-color: var(--bg-color);
+}
+
+.inputsWrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
