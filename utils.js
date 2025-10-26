@@ -25,7 +25,8 @@ function initInputLabel(id, type, labelText, inputClasses, labelClasses){
 
 /// создание инпута для ввода чисел
 export function createNumberInput(id, labelText){
-  const [label, input, span] = initInputLabel(id, 'number', labelText, 'valueInput', 'labelInput');
+  const [label, input, span] = initInputLabel(id, 'text', labelText, 'valueInput', 'labelInput');
+  input.setAttribute('inputmode', 'numeric')
   label.append(input, span);
   return [input, label];
 }
@@ -36,4 +37,15 @@ export function createSwitch(id, labelText){
     const slider = createTagWithClassNames('span', ['slider']);
     label.append(input, slider, span);
     return [input, label];
+}
+
+/// подсчет вхождений определенного символа в строку
+export function symCount(str, searchSym){
+  let count = 0;
+  for(const sym of str){
+    if(sym===searchSym){
+      count++;
+    }
+  }
+  return count;
 }
